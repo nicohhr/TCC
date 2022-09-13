@@ -3,24 +3,31 @@ from turtle import delay
 import serial 
 import time 
 
-serialObj = serial.Serial('COM5') # Selecionando porta serial 
+serialObj = serial.Serial() # Selecionando porta serial 
 
 # Definindo propriedades 
 serialObj.baudrate = 9600
-serialObj.bytesize = serial.EIGHTBITS     # Numero de bits com data
-serialObj.parity = serial.PARITY_EVEN     # Sem paridade
-serialObj.stopbits = serial.STOPBITS_ONE  
-
-time.sleep(3)
+serialObj.port = 'COM5'
+serialObj.open()
 
 # Teste: Enviando letra A
 
 print("CTRL + C para finalizar...")
 
+motor_positions = [120, 90, 45, 30, 100, 180]
+byte_msg = bytearray(motor_positions)
+
+cnt = 0
+
 try:
     while True:
-        serialObj.write(b'A')
-        time.sleep(1)
-except:
-    serialObj.close()         # Fechando porta serial
 
+        serialObj.write(byte_msg)
+        time.sleep(0.05)
+
+        if serialObj.in_waiting: 
+            packet = serialObj.readline()
+            print(packet.decode())
+            
+except: 
+    serialObj.close()
