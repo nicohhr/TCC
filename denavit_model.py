@@ -18,7 +18,7 @@ d5 = 16.5
 '''
 
 # Posição das juntas
-positions = [0, -0 + 90, -45 -90, 0, 0]
+positions = [0, -0 + 90, -0 -90, 0, 0]
 
 # Transformada 0-1 
 h01 = kin.denavit(0, 90, d1, positions[0])
