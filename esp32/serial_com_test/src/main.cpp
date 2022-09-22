@@ -1,9 +1,9 @@
-// Incluindo bibliotecas
+#include <Arduino.h>
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
 #define MOTOR_CNT 6
-#define RELE 8
+#define RELE 5
 #define SERVOMIN  125 // This is the 'minimum' pulse length count (out of 4096)
 #define SERVOMAX  530 // This is the 'maximum' pulse length count (out of 4096)
 
@@ -19,7 +19,7 @@ int angle2Bytes(long angle){
 }
 
 void setup() {
-  
+
   // Definindo pinos de entrada/saida
   pinMode(RELE, OUTPUT);
 
@@ -27,18 +27,17 @@ void setup() {
   digitalWrite(RELE, HIGH);
   delay(300);
 
-  // Iniciando Servoss
+  // Iniciando Servos
   pwm.begin();
   pwm.setPWMFreq(50);
   delay(300);
 
   // Iniciando comunicação Serial
-  Serial.begin(9600);
+  Serial.begin(115200);
 }
 
 void loop() {
-
-  // Conferindo se há dados seriais recebidos
+    // Conferindo se há dados seriais recebidos
   if (Serial.available()) {
     
     // Checando por bytes do header -> "OP"

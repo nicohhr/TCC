@@ -1,4 +1,5 @@
 import math
+from turtle import delay
 import pygame 
 from pygame.constants import*
 
@@ -32,8 +33,8 @@ joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_coun
 serialObj = serial.Serial() 
 
 # Definindo propriedades 
-serialObj.baudrate = 9600
-serialObj.port = 'COM5'
+serialObj.baudrate = 115200
+serialObj.port = 'COM6'
 serialObj.open()
 
 # Teste: Enviando letra A
@@ -45,6 +46,10 @@ m1_minus = -1
 
 # Motor a ser movimentado
 motor_selection = 1
+
+# Pulando lixo serial
+for i in range(50):
+  serialObj.readline()
 
 
 while True:
@@ -71,8 +76,6 @@ while True:
             # Obtendo valor do Joystick 
             m1_plus = pygame.joystick.Joystick(0).get_axis(5)
             m1_minus = pygame.joystick.Joystick(0).get_axis(4)
-    
-
 
 
     # Definindo razão de aceleração a partir da entrada
@@ -142,7 +145,7 @@ while True:
 
     #print("Trigger Pos: ", trigger_pos)
     #print("Ratio Plus: ", m1_plus_ratio)
-    #print("Ratio Minus: ", m1_minus_ratio)
+    #print("Ratio Minus: ", m1_minus_ratio)     
     #print("M1: ", m1)
 
     serialObj.write(byte_msg)
@@ -150,4 +153,5 @@ while True:
 
     if serialObj.in_waiting: 
         packet = serialObj.readline()
-        print(packet.decode())
+        #print(packet.decode())
+        print(int(m1), int(m2), int(m3), int(m4), int(m5), int(m6))
