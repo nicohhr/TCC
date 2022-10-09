@@ -52,7 +52,7 @@ void loop() {
       if (Serial.read() == 'E' && Serial.read() == 'D') {
         
         // Atualizando posição dos motores. 
-        // Valores apenas serão escritos se o apcote for válido
+        // Valores apenas serão escritos se o pacote for válido
         for (int m = 0; m < MOTOR_CNT; m++) {
           pwm.setPWM(m, 0, angle2Bytes(motorPositions[m]));
         }

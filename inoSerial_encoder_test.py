@@ -14,7 +14,7 @@ def map(x, in_min, in_max, out_min, out_max) -> float:
 xlr8_m1 = 10
 xlr8_m2 = 10
 
-# Posição inicial dos motores/juntas
+# Posição inicial dos motores/juntas (OBS: transformar em array)
 m1 = 90
 m2 = 90
 m3 = 90

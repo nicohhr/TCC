@@ -41,3 +41,5 @@ print(h01.dot(h12))
 print(h01.dot(h12).dot(h23))
 print(h01.dot(h12).dot(h23).dot(h34))
 print(h01.dot(h12).dot(h23).dot(h34).dot(h45))
+
+input("Press Enter to continue...")
