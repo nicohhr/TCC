@@ -1,5 +1,5 @@
 from turtle import position
-from robotics import kinematics as kin
+from src.robotics import kinematics as kin 
 import numpy as np
 
 # Variaveis em cm 
