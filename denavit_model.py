@@ -16,7 +16,7 @@ d5 = 5.0 #16.5
 
 '''
 
-# ----------------- CONVERTENDO ROTAÇÕES UNITY PARA DENAVIT
+# ----------------- Conversão de rotações referencia unity/servo para Denavit
 
 def servo1(servoPos : float) -> float:
     return kin.map(servoPos, 0, 180, 90, -90)
@@ -32,10 +32,10 @@ def servo4(servoPos : float) -> float:
 
 # ----------------- DEFININDO ROTAÇÃO DE CADA JUNTA
 
-j1 = 52
-j2 = 60
-j3 = 83
-j4 = 12
+j1 = 90
+j2 = 90
+j3 = 90
+j4 = 90
 
 # Posição das juntas
 positions = [servo1(j1), j2, servo3(j3), servo4(j4)]
@@ -56,12 +56,16 @@ h34 = kin.denavit(d4, 90, 0, positions[3])
 h45 = kin.denavit(0, 0, d5, 0)
 
 # Exibindo resultado
-print(h01)
-print(h01.dot(h12))
-print(h01.dot(h12).dot(h23))
-print(h01.dot(h12).dot(h23).dot(h34))
+#print(h01)
+#print(h01.dot(h12))
+#print(h01.dot(h12).dot(h23))
+#print(h01.dot(h12).dot(h23).dot(h34))
 #print(h01.dot(h12).dot(h23).dot(h34).dot(h45))
 
-print(kin.getDenavitPositions((h01.dot(h12).dot(h23).dot(h34).dot(h45))))
+result = kin.getDenavitPositions((h01.dot(h12).dot(h23).dot(h34).dot(h45)))
+
+print( "X = ", result[0])
+print( "Y = ", result[1])
+print( "Z = ", result[2])
 
 #input("Press Enter to continue...")
