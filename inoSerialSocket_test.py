@@ -1,10 +1,6 @@
-from ctypes import sizeof
-from turtle import delay
 import pygame 
 from pygame.constants import *
 
-import serial 
-import time 
 import numpy as np 
 import src.robotics.simulatorData as sd
 
@@ -72,7 +68,5 @@ while True:
     elif motorPositions[motor_selection-1] < 0: 
         motorPositions[motor_selection-1] = 0   
 
-    #sd.sendJointData(motorPos=motorPositions)
-    #sd.sendFloatData(motorPositions[0])
     sd.sendArmData(motorPos=motorPositions)
     print(motorPositions)

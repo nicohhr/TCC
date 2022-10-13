@@ -1,3 +1,4 @@
+import array
 from cmath import cos
 from math import cos, sin, radians
 from scipy.spatial.transform import Rotation as R 
@@ -190,3 +191,19 @@ def denavit(a: int | float, alfa: int | float, d: int | float, teta: int | float
                        [0          , 0                      , 0                       , 1            ]])
 
     return matrix
+
+def getDenavitPositions(transform: np.ndarray) -> list:
+    '''
+    Obtém posições em x, y e z dada a entrada de uma matriz de transformação hmogênea
+    
+    Paremeter
+    ---------
+    - transform:
+         numpy array contendo a transformada homogênea
+    '''
+
+    return [transform.item((0, 3)), transform.item((1, 3)), transform.item((2, 3))]
+    
+def map(x, in_min, in_max, out_min, out_max) -> float:
+    return float((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
+
