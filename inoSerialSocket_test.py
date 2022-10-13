@@ -2,7 +2,7 @@ import pygame
 from pygame.constants import *
 
 import numpy as np 
-import src.robotics.simulatorData as sd
+import src.robotics.simulator as sd
 
 MOTORS = 6 
 
@@ -29,6 +29,9 @@ print("CTRL + C para finalizar...")
 motor_selection = 1
 m1_plus = -1
 m1_minus = -1
+
+# Conectando com o simulador 
+sd.connect()
 
 while True: 
 
@@ -69,4 +72,5 @@ while True:
         motorPositions[motor_selection-1] = 0   
 
     sd.sendArmData(motorPos=motorPositions)
-    print(motorPositions)
+    #print(motorPositions)
+    print(sd.getData())
