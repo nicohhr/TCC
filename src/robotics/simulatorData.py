@@ -63,8 +63,3 @@ def sendArmData(fk_pos : array = None, ik_pos : array = None, motorPos : array =
 
     # Enviando dados 
     unitySocket.send(byte_array)
-
-
-
-    
-    
