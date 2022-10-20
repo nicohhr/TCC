@@ -73,4 +73,4 @@ while True:
 
     sd.sendArmData(motorPos=motorPositions)
     #print(motorPositions)
-    print(sd.getData())
+    print(sd.getFkData())

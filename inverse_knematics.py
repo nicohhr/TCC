@@ -21,12 +21,12 @@ theta_0 = math.asin(y/new_x)
 
 # CALCULANDO ROTAÇÃO DO BRAÇO 
 # - Obtendo theta 1
-theta_1_1 = math.atan2(new_x, y) 
-theta_1_2 = math.acos((x**2 + y**2 + d2**2 - d3**2)/(d2*math.sqrt(new_x**2 + y**2)))
+theta_1_1 = math.atan2(new_x, z) 
+theta_1_2 = math.acos((x**2 + z**2 + d2**2 - d3**2)/(d2*math.sqrt(new_x**2 + z**2)))
 theta_1 = theta_1_1 + theta_1_2
 
 # - Obtendo theta 2
-theta_2 = math.acos((new_x**2 + y**2 - d2**2 - d3**2)/(2*d2*d3))
+theta_2 = math.acos((new_x**2 + z**2 - d2**2 - d3**2)/(2*d2*d3))
 
 # Exibindo resultados
 print("theta0:", math.degrees(theta_0),"theta1:", math.degrees(theta_1), "theta2:", math.degrees(theta_2))

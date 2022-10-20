@@ -1,9 +1,8 @@
-from turtle import pos
 from src.robotics import simulator 
 from src.robotics import kinematics as kin
 import numpy as np
 
-MOTORS = 6 # definindo quantidade de motores 
+JOINT_COUNT = 4 # definindo quantidade de motores 
 
 # ----------------- Conversão de rotações referencia unity/servo para Denavit
 
@@ -33,20 +32,13 @@ j1 = 90.0
 j2 = 90.0
 j3 = 90.0
 j4 = 90.0
-
 initialPositions = [j1, j2, j3, j4]
 
 # Definindo tabela de cálculo de Denavit-Hartenberg
 def processDenavitTable(jointPositions : list[float]) -> list[float]:
-
-    # Passando valores para variaveis float
-    j1 = jointPositions[0]
-    j2 = float(jointPositions[1])
-    j3 = float(jointPositions[2])
-    j4 = float(jointPositions[3])
     
-    # Posição das juntas 
-    positions = [servo1(j1), j2, servo3(j3), servo4(j4)]
+    # Processando referência das juntas
+    positions = [servo1(jointPositions[0]), jointPositions[1], servo3(jointPositions[2]), servo4(jointPositions[3])]
 
     # Calculando linhas da tabela
     h01 = kin.denavit(0, 90, d1, positions[0])
@@ -56,6 +48,7 @@ def processDenavitTable(jointPositions : list[float]) -> list[float]:
     h45 = kin.denavit(0, 0, d5, 0)
     return  kin.getDenavitPositions((h01.dot(h12).dot(h23).dot(h34).dot(h45)))
 
+# ----------------------------------------------------------------------------
 
 # Estabelecendo conexão com o simulador
 simulator.connect()
@@ -64,7 +57,7 @@ simulator.connect()
 while True: 
 
     # Recebendo posição das juntas do simulador
-    armPositions = simulator.getData()
+    armPositions = simulator.getData(JOINT_COUNT)
 
     # Calculando posição do end effector pela cinematica direta
     endEffector_pos = processDenavitTable(armPositions)
