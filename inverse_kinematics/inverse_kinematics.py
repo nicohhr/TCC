@@ -10,11 +10,12 @@ def t1(angle : float) -> float:
 def t2(angle : float) -> float: 
     return 180 - math.degrees(angle)
 
-
 # Definindo coordenadas desejadas
-x = 15
-y = 5
-z = -5 - 8.5
+x = 9.750195503234863
+y = -0.00400543212890625
+z = 19.0 - 8.5
+
+print(type(x))
 
 # Tamanho dos elos [cm] 
 d1 = 8.5
