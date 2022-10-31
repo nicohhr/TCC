@@ -6,15 +6,13 @@ from src.robotics import simulator
 d1 = 8.444
 d2 = 10.5
 d3 = 9.72
-d4 = 2.8
-d5 = 5.0
-l3 = 3.9
+l3 = 4.28297 #5.77 # #3.9
 
 # Angulo de offset de end effector
 offset_angle = math.atan2(28, 50)
 
 # Angulo da ferramenta em relação a superficie 
-phi = math.radians(-90)
+phi = math.radians(-90) #-(math.radians(90) - offset_angle)
 
 # Funções de conversão
 def t0(angle : float) -> float:
@@ -32,6 +30,7 @@ def t2(angle : float) -> float:
 def t3(angle : float) -> float:
     val = math.degrees(angle)
     #res = (360 + val)
+    #res = - val + math.degrees(offset_angle)
     res = - val
     return  clamp(res, 0, 180)
 
@@ -59,7 +58,7 @@ def processInverseKinematics(desiredPos : list[float]):
     try:
         # CALCULANDO ROTAÇÃO DA BASE
         # - Obtendo "novo x"
-        new_x = math.sqrt(x**2 + y**2)
+        new_x = math.sqrt(x**2 + y**2) 
         #new_x = new_x - (l3 * math.cos(phi))
 
         # - Calculando ângulo de rotação da junta da base
@@ -70,14 +69,13 @@ def processInverseKinematics(desiredPos : list[float]):
         theta_1_1 = math.atan2(z, new_x) 
         theta_1_2 = math.acos((new_x**2 + z**2 + d2**2 - d3**2)/(2*d2*math.sqrt(new_x**2 + z**2)))
         theta_1 = theta_1_1 + theta_1_2
-
         
         # - Obtendo theta 2
         theta_2 = math.acos((new_x**2 + z**2 - d2**2 - d3**2)/(2*d2*d3))
 
         # - Obtendo theta 3 
         theta_3 = phi - (theta_1 - theta_2)
-        print(math.degrees(theta_3), t3(theta_3), x, y, (z + 8.5), math.degrees(phi)) 
+        print(math.degrees(theta_3), t3(theta_3), new_x, y, (z + 8.5), math.degrees(phi)) 
 
         return [t0(theta_0), t1(theta_1), t2(theta_2), t3(theta_3), 0, 0]
 

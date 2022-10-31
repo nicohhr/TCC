@@ -15,7 +15,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
 // Funções
 int angle2Bytes(long angle){
-  return map(angle, 0, 255, SERVOMIN, SERVOMAX);
+  return map(angle, 0, 180, SERVOMIN, SERVOMAX);
 }
 
 void setup() {

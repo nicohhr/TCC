@@ -13,10 +13,12 @@ def servo1(servoPos : float) -> float:
 # 180 totalmente para atrás 
 
 def servo3(servoPos : float) -> float:
-    return servoPos - 180
+    print("Servo 3: ", servoPos, servoPos + 180, servoPos - 180)
+    #return (servoPos - 180)
+    return kin.map(servoPos, 0, 180, 0, -180)
 
 def servo4(servoPos : float) -> float: 
-    return kin.map(servoPos, 0, 180, -90, 90)
+    return kin.map(servoPos, 0, 180, 90, -90)
 
 # ----------------- DEFININDO ROTAÇÃO DE CADA JUNTA
 
@@ -66,4 +68,4 @@ while True:
     simulator.sendArmData(fk_pos=endEffector_pos)
 
     # Exibindo posição calculada
-    print(armPositions, endEffector_pos)
+    #print(armPositions, endEffector_pos)
